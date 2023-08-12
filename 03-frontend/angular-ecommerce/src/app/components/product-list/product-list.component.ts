@@ -12,6 +12,8 @@ export class ProductListComponent {
 
   products!: Product[];
   currentCategoryId!: number;
+  searchMode!: boolean;
+
   constructor(private productService: ProductService,
               private route: ActivatedRoute){}
 
@@ -22,7 +24,28 @@ export class ProductListComponent {
     })
   }
   listProducts(){
+    //We are performing search if has('keyword') is true.
+    this.searchMode = this.route.snapshot.paramMap.has('keyword')
 
+    if(this.searchMode){
+      this.handleSearchProducts();
+    }
+    //If we are not searching show products by default.
+    else{
+      this.handleListProducts();
+    }
+  }
+  handleSearchProducts(){
+    //get keyword from search
+    const theKeyword: string = this.route.snapshot.paramMap.get('keyword')!
+    //search for the products using keyword
+    this.productService.searchProducts(theKeyword).subscribe(
+      data=>{
+        this.products = data;
+      }
+    )
+  }
+  handleListProducts(){
     //check if "id" parameter is available
     //snapshot - state of route in given moment, 
     //paramMap - Map of all the route parameters
