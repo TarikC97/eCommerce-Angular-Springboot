@@ -17,8 +17,10 @@ export class ProductListComponent {
 
   //new properties for pagination
   thePageNumber: number = 1;
-  thePageSize: number = 8;
+  thePageSize: number = 5;
   theTotalElements: number = 0;
+
+  previousKeyword: string = "";
 
   constructor(private productService: ProductService,
               private route: ActivatedRoute){}
@@ -44,10 +46,22 @@ export class ProductListComponent {
   handleSearchProducts(){
     //get keyword from search
     const theKeyword: string = this.route.snapshot.paramMap.get('keyword')!
+    //if we have different keyword then previous
+    //set pageNumber to 1
+    if(this.previousKeyword != theKeyword){
+      this.thePageNumber=1
+    }
+    this.previousKeyword = theKeyword
+
+    // console.log(`keyword=${theKeyword},thePageNumber=${this.thePageNumber}`)
+
     //search for the products using keyword
-    this.productService.searchProducts(theKeyword).subscribe(
+    this.productService.searchProductsPaginate(this.thePageNumber-1,this.thePageSize,theKeyword).subscribe(
       data=>{
-        this.products = data;
+        this.products = data._embedded.products;
+        this.thePageNumber = data.page.number+1;
+        this.thePageSize = data.page.size;
+        this.theTotalElements = data.page.totalElements;;
       }
     )
   }
@@ -74,7 +88,7 @@ export class ProductListComponent {
       this.thePageNumber = 1 
     }
     this.previousCategoryId = this.currentCategoryId
-    console.log(`CurrentCategoryId=${this.currentCategoryId}, thePageNumber=${this.thePageNumber}`)
+    // console.log(`CurrentCategoryId=${this.currentCategoryId}, thePageNumber=${this.thePageNumber}`)
 
     this.productService.getProductListPaginate(this.thePageNumber-1,
                                                this.thePageSize,
@@ -88,5 +102,10 @@ export class ProductListComponent {
                                                 }
                                                );
   }
+  updatePageSize(pageSize: any) {
+    this.thePageSize=pageSize
+    this.thePageNumber =1
+    this.listProducts();
+    }
 }
  
