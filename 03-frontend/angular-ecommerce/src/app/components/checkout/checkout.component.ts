@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { TCShopFormService } from 'src/app/services/tcshop-form.service';
 
 @Component({
   selector: 'app-checkout',
@@ -12,7 +13,11 @@ export class CheckoutComponent {
   totalPrice: number = 0;
   totalQuantity: number=0;
 
-  constructor(private formBuilder: FormBuilder){}
+  creditCardYears: number[] =[]
+  creditCardMonths: number[]=[]
+
+  constructor(private formBuilder: FormBuilder,
+              private tcShopFormService: TCShopFormService){}
 
   ngOnInit(): void{
     this.checkoutFormGroup = this.formBuilder.group({
@@ -44,6 +49,22 @@ export class CheckoutComponent {
           expirationYear:['']
       })
     })
+    //populate credit card months,date starts from 0
+    const startMonth: number = new Date().getMonth()+1
+    console.log("Start month:"+startMonth)
+
+    this.tcShopFormService.getCreditCardMonths(startMonth).subscribe(
+      data=>{
+        console.log("Retrivied credit card months"+JSON.stringify(data))
+        this.creditCardMonths = data
+      }
+    )
+    //populate credit card years
+    this.tcShopFormService.getCreditCardYears().subscribe(
+      data=>{
+        this.creditCardYears = data
+      }
+    )
   }
   onSubmit(){
     console.log("Submit button")
@@ -58,5 +79,26 @@ export class CheckoutComponent {
       else{
         this.checkoutFormGroup.controls['billingAddress'].reset()
       }
+    }
+
+    handleMonthsAndYears(){
+      const creditCardFormGroup = this.checkoutFormGroup.get('creditCard')
+
+      const currentYear: number = new Date().getFullYear()
+      const selectedYear: number = Number(creditCardFormGroup?.value.expirationYear)
+      //if the current year equals selected, start month 1
+      let startMonth: number;
+      if(currentYear === selectedYear){
+        startMonth = new Date().getMonth()+1
+      }
+      else{
+        startMonth=1
+      }
+      this.tcShopFormService.getCreditCardMonths(startMonth).subscribe(
+        data=>{
+          this.creditCardMonths = data
+        }
+      )
+
     }
 }
