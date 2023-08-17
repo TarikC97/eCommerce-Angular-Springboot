@@ -568,6 +568,7 @@ input.au-input.au-input-xl{
  */
 
 .form-area{
+    margin-top: 10px;
     background:#e5e5e5;
     position:relative;
     margin-bottom:45px;
