@@ -7,5 +7,5 @@ import lombok.NonNull;
 public class PurchaseResponse {
 
     @NonNull
-    private  String orderTrackingNumber;
+    private String orderTrackingNumber;
 }
