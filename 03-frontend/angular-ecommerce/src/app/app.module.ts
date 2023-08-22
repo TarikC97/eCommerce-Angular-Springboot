@@ -30,14 +30,6 @@ import {
 const oktaConfig = myAppConfig.oidc;
 const oktaAuth = new OktaAuth(oktaConfig);
 
-// const oktaConfig = Object.assign({
-//   onAuthRequired:(injector:any)=>{
-//     const router = injector.get(Router)
-//     //redirect user to login page
-//     router.navigate(['/login'])
-//   }
-// },myAppConfig.oidc)
-
 const routes: Routes =[
   {path: 'login/callback',component:OktaCallbackComponent},
   {path:'login',component: LoginComponent},
