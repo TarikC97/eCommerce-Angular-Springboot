@@ -21,6 +21,7 @@ import { LoginStatusComponent } from './components/login-status/login-status.com
 
 
 import myAppConfig from './config/my-app-config';
+import { RegisterComponent } from './components/register/register.component';
 // import {
 //   OKTA_CONFIG,
 //   OktaAuthModule,
@@ -32,6 +33,7 @@ import myAppConfig from './config/my-app-config';
 
 const routes: Routes =[
   // {path: 'login/callback',component:OktaCallbackComponent},
+  {path:'register',component: RegisterComponent},
   {path:'login',component: LoginComponent},
   {path:'checkout',component:CheckoutComponent},
   {path:'cart-details',component: CartDetailsComponent},
@@ -56,7 +58,8 @@ const routes: Routes =[
     CartDetailsComponent,
     CheckoutComponent,
     LoginComponent,
-    LoginStatusComponent
+    LoginStatusComponent,
+    RegisterComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
