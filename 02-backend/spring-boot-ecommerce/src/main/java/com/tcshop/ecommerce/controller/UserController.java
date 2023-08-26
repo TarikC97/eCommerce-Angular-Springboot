@@ -2,13 +2,12 @@ package com.tcshop.ecommerce.controller;
 
 import com.tcshop.ecommerce.dao.UserRepository;
 import com.tcshop.ecommerce.entity.User;
+import com.tcshop.ecommerce.entity.UserRole;
 import com.tcshop.ecommerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("/api")
 public class UserController {
@@ -24,10 +23,11 @@ public class UserController {
             throw new IllegalStateException("Email taken");
         }
         else{
+            UserRole roles = UserRole.User;
             User newUser = new User();
             newUser.setName(user.getName());
             newUser.setSurname(user.getSurname());
-            newUser.setRole(user.getRole());
+            newUser.setRole(roles);
             newUser.setEmail(user.getEmail());
             newUser.setPassword(user.getPassword());
             userRepository.save(newUser);

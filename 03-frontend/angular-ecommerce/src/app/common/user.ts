@@ -4,4 +4,12 @@ export class User {
     surname!:string;
     email!:string;
     password!:string;
+    role!:Role;
 }
+export enum Role{
+    Admin,User,
+}
+// enum role{
+//     Admin,
+//     User
+// }

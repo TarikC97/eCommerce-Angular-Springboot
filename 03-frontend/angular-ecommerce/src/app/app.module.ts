@@ -15,7 +15,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CartStatusComponent } from './components/cart-status/cart-status.component';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { LoginStatusComponent } from './components/login-status/login-status.component';
 
@@ -34,7 +34,7 @@ import { RegisterComponent } from './components/register/register.component';
 const routes: Routes =[
   // {path: 'login/callback',component:OktaCallbackComponent},
   {path:'register',component: RegisterComponent},
-  {path:'login',component: LoginComponent},
+  // {path:'login',component: LoginComponent},
   {path:'checkout',component:CheckoutComponent},
   {path:'cart-details',component: CartDetailsComponent},
   {path:'products/:id',component: ProductDetailsComponent},
@@ -67,6 +67,7 @@ const routes: Routes =[
     HttpClientModule,
     NgbModule,
     ReactiveFormsModule,
+    FormsModule,
     // OktaAuthModule
   ],
   providers: [ProductService],
