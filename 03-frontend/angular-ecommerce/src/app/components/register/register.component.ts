@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Role, User } from 'src/app/common/user';
+import {  User } from 'src/app/common/user';
+import { Roles } from 'src/app/common/roles';
 import { RegisterService } from 'src/app/services/register.service';
 
 @Component({
@@ -10,13 +11,14 @@ import { RegisterService } from 'src/app/services/register.service';
 })
 export class RegisterComponent {
 
-  // role:Role[]=[];
+  user = Roles.User;
+  admin = Roles.Admin;
 
   constructor(private userService: RegisterService){}
   registerUser(regForm: NgForm){
     this.userService.registerUser(regForm.value).subscribe(
       (response)=>{
-        // this.role = response.role;
+      
         console.log(response);
       },
       (error)=>{
@@ -25,5 +27,5 @@ export class RegisterComponent {
       
     )
   }
-
+  
 }
