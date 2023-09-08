@@ -3,7 +3,6 @@ import { OKTA_AUTH } from '@okta/okta-angular';
 import { OktaAuth } from '@okta/okta-auth-js';
 import OktaSignIn from '@okta/okta-signin-widget';
 
-import myAppConfig from '../../config/my-app-config';
 
 @Component({
   selector: 'app-login',

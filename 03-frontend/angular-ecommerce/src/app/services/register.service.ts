@@ -18,11 +18,11 @@ export class RegisterService {
   registerUser(register: User):Observable<any>{
       return this.httpClient.post<User>(this.registerUrl,register);
   }
-  getRoles(): Observable<Roles[]>{
-    return this.httpClient.get<GetResponseRoles>(this.registerUrl).pipe(
-      map(response => response.role)
-    );
-  }
+  // getRoles(): Observable<Roles[]>{
+  //   return this.httpClient.get<GetResponseRoles>(this.registerUrl).pipe(
+  //     map(response => response.role)
+  //   );
+  // }
   loginUser(login:User):Observable<any>{
     return this.httpClient.post<User>(this.loginUrl,login)
   }
