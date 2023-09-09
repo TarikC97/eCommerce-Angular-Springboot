@@ -25,5 +25,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private UserRole role;
-
+    @Column(name="verified")
+    private Boolean verified;
+    @Column(name="otp")
+    private String otp;
 }

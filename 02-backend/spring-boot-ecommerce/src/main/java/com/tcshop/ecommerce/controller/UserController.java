@@ -3,6 +3,7 @@ package com.tcshop.ecommerce.controller;
 import com.tcshop.ecommerce.dao.UserRepository;
 import com.tcshop.ecommerce.entity.User;
 import com.tcshop.ecommerce.service.UserService;
+import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +17,7 @@ public class UserController {
     @Autowired
     private UserService userService;
     @PostMapping("/register")
-    public User registerNewUser(@RequestBody  User user){
+    public User registerNewUser(@RequestBody  User user) throws MessagingException {
 
         if(userRepository.existsByEmail(user.getEmail())){
             throw new IllegalStateException("Email taken");
