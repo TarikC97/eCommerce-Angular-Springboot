@@ -15,7 +15,7 @@ public class EmailBody {
     public void sendOtp(String email,String otp) throws MessagingException {
           SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
           simpleMailMessage.setTo(email);
-          simpleMailMessage.setSubject("Verify Otp");
+          simpleMailMessage.setSubject("Account Verification");
           simpleMailMessage.setText("Hello, your Otp code to verify you account is: "+otp);
 
 //            MimeMessage mimeMessage = javaMailSender.createMimeMessage();

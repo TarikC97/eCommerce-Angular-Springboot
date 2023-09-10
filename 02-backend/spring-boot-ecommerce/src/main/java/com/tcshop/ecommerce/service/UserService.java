@@ -15,16 +15,16 @@ public class UserService {
         return  userRepository.save(user);
     }
 
-    public String verifyAccount(String email,String otp){
-
-        User user = userRepository.findByEmail(email);
-        if(user.getOtp().equals(otp)){
-            user.setVerified(true);
-            userRepository.save(user);
-            return  "OTP verified! You can login now!";
-        }
-
-        return  otp;
-    }
+//    public User verifyAccount(User userBody){
+//
+//        User user = userRepository.findByEmail(userBody.getEmail());
+//        if(user.getOtp().equals(userBody.getOtp())){
+//            user.setVerified(true);
+//            userRepository.save(user);
+//            return  user;
+//        }
+//
+//        return  null;
+//    }
 
 }

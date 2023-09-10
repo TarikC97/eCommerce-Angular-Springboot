@@ -53,8 +53,15 @@ public class UserController {
         }
     }
     @PutMapping("/verify")
-    public String verifyUser(@RequestParam String email,@RequestParam String otp){
-            return userService.verifyAccount(email,otp);
+    public User verifyAccount(@RequestBody  User userBody){
+        User user = userRepository.findByEmail(userBody.getEmail());
+        if(user.getOtp().equals(userBody.getOtp())){
+            user.setVerified(true);
+            userRepository.save(user);
+            return  user;
+        }
+
+        return  null;
     }
 
     @PostMapping("/login")
