@@ -4,6 +4,7 @@ package com.tcshop.ecommerce.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Value;
 
 @Entity
 @Getter
@@ -25,8 +26,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private UserRole role;
+    @Value("false")
     @Column(name="verified")
-    private Boolean verified;
+    private Boolean verified=false ;
     @Column(name="otp")
     private String otp;
 }

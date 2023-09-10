@@ -1,7 +1,10 @@
 package com.tcshop.ecommerce.config;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Random;
 
+@Component
 public class OtpCode {
 
     public String generateOtp(){
