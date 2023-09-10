@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {  User } from 'src/app/common/user';
-import { Roles } from 'src/app/common/roles';
 import { RegisterService } from 'src/app/services/register.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TCShopValidators } from 'src/app/validators/tcshop-validators';
@@ -18,13 +17,14 @@ export class VerifyComponent {
     private router: Router){}
 
     verifyFormGroup!: FormGroup;
-
+    newUser: User = JSON.parse(localStorage.getItem('user') || '{}')
+    
     ngOnInit(): void{
       this.verifyFormGroup = this.formBuilder.group({
           email: new FormControl('',
                                 [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
           otp: new FormControl('',
-                                [Validators.required,Validators.minLength(8),TCShopValidators.notOnlyWhiteSpace]),
+                                [Validators.required,Validators.minLength(5),TCShopValidators.notOnlyWhiteSpace]),
                                  
       })
     }
@@ -32,6 +32,20 @@ export class VerifyComponent {
     get otp(){return this.verifyFormGroup.get('otp')}
 
     onSubmit(){
-      
+        let user = new User();
+        user = JSON.parse(localStorage.getItem('user') || '{}')
+        user.email = this.verifyFormGroup.controls['email'].value
+        user.otp = this.verifyFormGroup.controls['otp'].value
+        this.userService.verifyUser(user).subscribe({
+          next: response=>{
+            alert('User is verified!')
+            console.log(response)
+            this.router.navigate(['/'])
+          },
+          error: err=>{
+            alert(`There was an error:${err.message}`)
+          }
+
+        })
     }
 }

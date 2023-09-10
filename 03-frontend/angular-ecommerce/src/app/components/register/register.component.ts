@@ -61,7 +61,8 @@ export class RegisterComponent {
     this.userService.registerUser(newUser).subscribe({
       next: response =>{
         alert(`User added to db`)
-        console.log(response)
+        localStorage.setItem('user',JSON.stringify(response));
+        // console.log(response)
         this.router.navigate(['/verify'])
         
       },
