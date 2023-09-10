@@ -62,7 +62,7 @@ export class RegisterComponent {
       next: response =>{
         alert(`User added to db`)
         console.log(response)
-        this.router.navigate(['/'])
+        this.router.navigate(['/verify'])
         
       },
       error: err =>{

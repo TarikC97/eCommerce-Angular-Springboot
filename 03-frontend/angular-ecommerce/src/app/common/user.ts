@@ -7,4 +7,6 @@ export class User {
     email!:string;
     password!:string;
     role!:Roles;
+    otp!:string;
+    verified!:boolean;
 }

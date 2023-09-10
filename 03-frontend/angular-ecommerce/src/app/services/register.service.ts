@@ -12,17 +12,16 @@ export class RegisterService {
 
   private registerUrl = 'http://localhost:8080/api/register';
   private loginUrl = 'http://localhost:8080/api/login';
+  private verifyUrl = 'http://localhost:8080/api/verify';
 
   constructor(private httpClient: HttpClient) { }
 
   registerUser(register: User):Observable<any>{
       return this.httpClient.post<User>(this.registerUrl,register);
   }
-  // getRoles(): Observable<Roles[]>{
-  //   return this.httpClient.get<GetResponseRoles>(this.registerUrl).pipe(
-  //     map(response => response.role)
-  //   );
-  // }
+  verifyUser(verify: User):Observable<any>{
+    return this.httpClient.put<User>(this.verifyUrl,verify)
+  }
   loginUser(login:User):Observable<any>{
     return this.httpClient.post<User>(this.loginUrl,login)
   }

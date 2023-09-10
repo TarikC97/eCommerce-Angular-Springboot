@@ -19,10 +19,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { LoginStatusComponent } from './components/login-status/login-status.component';
 import { RegisterComponent } from './components/register/register.component';
+import { VerifyComponent } from './components/verify/verify.component';
 
 const routes: Routes =[
   {path:'register',component: RegisterComponent},
-  // {path:'login',component: LoginComponent},
+  {path:'verify',component: VerifyComponent},
   {path:'checkout',component:CheckoutComponent},
   {path:'cart-details',component: CartDetailsComponent},
   {path:'products/:id',component: ProductDetailsComponent},
@@ -47,7 +48,8 @@ const routes: Routes =[
     CheckoutComponent,
     LoginComponent,
     LoginStatusComponent,
-    RegisterComponent
+    RegisterComponent,
+    VerifyComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
