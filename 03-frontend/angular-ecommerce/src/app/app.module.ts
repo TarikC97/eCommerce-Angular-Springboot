@@ -1,6 +1,5 @@
-import { Injector, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { OktaAuth } from '@okta/okta-auth-js';
 
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
@@ -16,12 +15,13 @@ import { CartStatusComponent } from './components/cart-status/cart-status.compon
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LoginComponent } from './components/login/login.component';
-import { LoginStatusComponent } from './components/login-status/login-status.component';
 import { RegisterComponent } from './components/register/register.component';
 import { VerifyComponent } from './components/verify/verify.component';
+import { LoginComponent } from './components/login/login.component';
+import { LoginStatusComponent } from './components/login-status/login-status.component';
 
 const routes: Routes =[
+  {path:'login',component: LoginComponent},
   {path:'register',component: RegisterComponent},
   {path:'verify',component: VerifyComponent},
   {path:'checkout',component:CheckoutComponent},
@@ -46,10 +46,10 @@ const routes: Routes =[
     CartStatusComponent,
     CartDetailsComponent,
     CheckoutComponent,
-    LoginComponent,
-    LoginStatusComponent,
     RegisterComponent,
-    VerifyComponent
+    VerifyComponent,
+    LoginComponent,
+    LoginStatusComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

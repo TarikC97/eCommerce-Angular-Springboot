@@ -1,47 +1,49 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { OKTA_AUTH } from '@okta/okta-angular';
-import { OktaAuth } from '@okta/okta-auth-js';
-import OktaSignIn from '@okta/okta-signin-widget';
-
+import { Component } from '@angular/core';
+import {  User } from 'src/app/common/user';
+import { RegisterService } from 'src/app/services/register.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { TCShopValidators } from 'src/app/validators/tcshop-validators';
+import {Router} from "@angular/router"
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  // oktaSignin: any;
+  constructor(private userService: RegisterService,
+    private formBuilder: FormBuilder,
+    private router: Router){}
 
-  // constructor(@Inject(OKTA_AUTH) private oktaAuth: OktaAuth) {
+    loginFormGroup!: FormGroup;
+    
+    ngOnInit(): void{
+      this.loginFormGroup = this.formBuilder.group({
+          email: new FormControl('',
+                                [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
+          password: new FormControl('',
+                                [Validators.required,Validators.minLength(8),TCShopValidators.notOnlyWhiteSpace]),
+                                 
+      })
+    }
+    get email(){return this.loginFormGroup.get('email')}
+    get password(){return this.loginFormGroup.get('password')}
 
-  //   this.oktaSignin = new OktaSignIn({
-  //     logo: 'assets/images/logo.png',
-  //     baseUrl: myAppConfig.oidc.issuer.split('/oauth2')[0],
-  //     clientId: myAppConfig.oidc.clientId,
-  //     redirectUri: myAppConfig.oidc.redirectUri,
-  //     authParams: {
-  //       pkce: true,
-  //       issuer: myAppConfig.oidc.issuer,
-  //       scopes: myAppConfig.oidc.scopes
-  //     }
-  //   });
-  //  }
+    onSubmit(){
+        let user = new User();
+         user.email = this.loginFormGroup.controls['email'].value
+         user.password = this.loginFormGroup.controls['password'].value
+         this.userService.loginUser(user).subscribe({
+           next: response=>{
+             alert('User is Logged!')
+             localStorage.setItem('userLogged',JSON.stringify(response));
+             this.router.navigate(['/products'])
+           },
+           error: err=>{
+             alert(`There was an error:${err.message}`)
+           }
 
-   ngOnInit(): void {
-  //   this.oktaSignin.remove();
-
-  //   this.oktaSignin.renderEl({
-  //     el: '#okta-sign-in-widget'}, // this name should be same as div tag id in login.component.html
-  //     (response: any) => {
-  //       if (response.status === 'SUCCESS') {
-  //         this.oktaAuth.signInWithRedirect();
-  //       }
-  //     },
-  //     (error: any) => {
-  //       throw error;
-  //     }
-  //   );
-   }
-
+         })
+    }
 }

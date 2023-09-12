@@ -19,6 +19,7 @@ export class VerifyComponent {
     verifyFormGroup!: FormGroup;
     newUser: User = JSON.parse(localStorage.getItem('user') || '{}')
     
+
     ngOnInit(): void{
       this.verifyFormGroup = this.formBuilder.group({
           email: new FormControl('',
@@ -39,8 +40,8 @@ export class VerifyComponent {
         this.userService.verifyUser(user).subscribe({
           next: response=>{
             alert('User is verified!')
-            console.log(response)
-            this.router.navigate(['/'])
+            console.log(response.otp)
+            this.router.navigate(['/login']) 
           },
           error: err=>{
             alert(`There was an error:${err.message}`)

@@ -16,7 +16,6 @@ export class RegisterComponent {
   user = Roles.User;
   admin = Roles.Admin;
   registerFormGroup!: FormGroup;
-  // newUser!: User;
 
   constructor(private userService: RegisterService,
               private formBuilder: FormBuilder,
@@ -60,9 +59,8 @@ export class RegisterComponent {
     newUser.role = this.registerFormGroup.controls['roles'].value
     this.userService.registerUser(newUser).subscribe({
       next: response =>{
-        alert(`User added to db`)
+        alert(`User successfully Registred!`)
         localStorage.setItem('user',JSON.stringify(response));
-        // console.log(response)
         this.router.navigate(['/verify'])
         
       },
