@@ -14,7 +14,8 @@ export class LoginComponent {
 
   constructor(private userService: RegisterService,
     private formBuilder: FormBuilder,
-    private router: Router){}
+    private router: Router,
+    public status: RegisterService){}
 
     loginFormGroup!: FormGroup;
     
@@ -31,6 +32,12 @@ export class LoginComponent {
     get password(){return this.loginFormGroup.get('password')}
 
     onSubmit(){
+      if(this.loginFormGroup.invalid){
+        //Touching all fields triggers the display of error msg.
+        this.loginFormGroup.markAllAsTouched()
+        return
+      }
+      
         let user = new User();
          user.email = this.loginFormGroup.controls['email'].value
          user.password = this.loginFormGroup.controls['password'].value
@@ -38,6 +45,7 @@ export class LoginComponent {
            next: response=>{
              alert('User is Logged!')
              localStorage.setItem('userLogged',JSON.stringify(response));
+             this.status.setLoginStatus(1);
              this.router.navigate(['/products'])
            },
            error: err=>{

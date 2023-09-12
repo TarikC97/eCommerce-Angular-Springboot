@@ -1,17 +1,9 @@
 <div class="login-status-header">
-    <ng-container *ngIf="(name); then out; else sign">
-    </ng-container>
-   
-              
-    <ng-template #out>
-        <div *ngIf="(user| json) != ({} | json)">
-            {{this.user.name}}
-            {{this.user.surname}}
-         </div>     
-            <button (click)="logout()" class="security-btn">Logout</button>  
+   <div *ngIf="status.loginStatus === 1 ||  name;else sign">
+     <button  (click)="logout()" class="security-btn">Logout</button>  
+    </div>
+    <ng-template #sign>
+      <button routerLink="/register" class="security-btn">Sign Up</button>
     </ng-template>
-   
-   <ng-template #sign>
-        <button routerLink="/register" class="security-btn">Sign Up</button>
-   </ng-template> 
+    
 </div>

@@ -33,6 +33,12 @@ export class VerifyComponent {
     get otp(){return this.verifyFormGroup.get('otp')}
 
     onSubmit(){
+
+      if(this.verifyFormGroup.invalid){
+        //Touching all fields triggers the display of error msg.
+        this.verifyFormGroup.markAllAsTouched()
+        return
+      }
         let user = new User();
         user = JSON.parse(localStorage.getItem('user') || '{}')
         user.email = this.verifyFormGroup.controls['email'].value

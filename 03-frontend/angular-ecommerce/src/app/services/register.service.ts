@@ -15,6 +15,7 @@ export class RegisterService {
   private verifyUrl = 'http://localhost:8080/api/verify';
 
   constructor(private httpClient: HttpClient) { }
+  public loginStatus = 0 //0-not logged,1-logged!
 
   registerUser(register: User):Observable<any>{
       return this.httpClient.post<User>(this.registerUrl,register);
@@ -24,6 +25,9 @@ export class RegisterService {
   }
   loginUser(login:User):Observable<any>{
     return this.httpClient.post<User>(this.loginUrl,login)
+  }
+  setLoginStatus(status: number){
+    this.loginStatus = status
   }
 }
 
