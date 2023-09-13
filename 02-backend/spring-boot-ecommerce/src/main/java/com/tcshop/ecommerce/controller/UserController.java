@@ -9,6 +9,8 @@ import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @CrossOrigin("http://localhost:4200")
 @RestController
@@ -60,8 +62,9 @@ public class UserController {
             userRepository.save(user);
             return  user;
         }
-
-        return  null;
+        else{
+            throw new IllegalStateException("Wrong code, try again!");
+        }
     }
 
     @PostMapping("/login")
@@ -74,4 +77,13 @@ public class UserController {
             throw new IllegalStateException("User doesn't exist or his account is not Verified!");
        }
     }
+    @GetMapping("/users")
+    public List<User> getAllUsers(){
+        return userService.getAllUsers();
+    }
+    @DeleteMapping("/delete/{id}")
+    public void deleteUser(@PathVariable("id") Long id){
+        userService.deleteUser(id);
+    }
+
 }

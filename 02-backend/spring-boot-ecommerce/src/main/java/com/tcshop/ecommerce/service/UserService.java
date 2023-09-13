@@ -5,6 +5,9 @@ import com.tcshop.ecommerce.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -15,16 +18,14 @@ public class UserService {
         return  userRepository.save(user);
     }
 
-//    public User verifyAccount(User userBody){
-//
-//        User user = userRepository.findByEmail(userBody.getEmail());
-//        if(user.getOtp().equals(userBody.getOtp())){
-//            user.setVerified(true);
-//            userRepository.save(user);
-//            return  user;
-//        }
-//
-//        return  null;
-//    }
+    public List<User> getAllUsers(){
+        List<User> users = new ArrayList<User>();
+        userRepository.findAll().forEach(user -> users.add(user));
+        return  users;
+    }
+    public void deleteUser(Long id){
+        userRepository.deleteById(id);
+    }
+
 
 }
