@@ -1,7 +1,8 @@
 <div class="login-status-header">
    <div *ngIf="status.loginStatus === 1 ||  name;else sign">
      <button  (click)="logout()" class="security-btn">Logout</button>
-     <button *ngIf="role == 'Admin'"  routerLink="/users" class="security-btn">Users</button>  
+     <button *ngIf="role == 'Admin'"  routerLink="/users" class="security-btn">Users</button>
+     <button *ngIf="role == 'Admin'"  routerLink="/admin/products" class="security-btn">Products</button>  
     </div>
     <ng-template #sign>
       <button routerLink="/register" class="security-btn">Sign Up</button>

@@ -12,8 +12,13 @@ export class ProductService {
  
   private baseUrl = 'http://localhost:8080/api/products';
   private categoryUrl = 'http://localhost:8080/api/product-category';
+  private deleteUrl = 'http://localhost:8080/api/products/delete'
 
   constructor(private httpClient: HttpClient) { }
+
+  deleteProduct(product: string):Observable<any>{
+    return this.httpClient.delete<any>(`${this.deleteUrl}/${product}`)
+  }
 
   getProduct(theProductId: number): Observable<Product>{
     //need to build url
@@ -57,6 +62,12 @@ export class ProductService {
       map(response => response._embedded.products)
     );
   }
+  
+  getAllProducts():Observable<Product[]>{
+    return this.httpClient.get<GetResponseProducts>(this.baseUrl).pipe(
+      map(response => response._embedded.products)
+    );
+}
 
   getProductCategories():Observable<ProductCategory[]>{
 
