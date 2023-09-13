@@ -19,8 +19,10 @@ import { RegisterComponent } from './components/register/register.component';
 import { VerifyComponent } from './components/verify/verify.component';
 import { LoginComponent } from './components/login/login.component';
 import { LoginStatusComponent } from './components/login-status/login-status.component';
+import { UsersComponent } from './components/users/users.component';
 
 const routes: Routes =[
+  {path:'users',component: UsersComponent},
   {path:'login',component: LoginComponent},
   {path:'register',component: RegisterComponent},
   {path:'verify',component: VerifyComponent},
@@ -49,7 +51,8 @@ const routes: Routes =[
     RegisterComponent,
     VerifyComponent,
     LoginComponent,
-    LoginStatusComponent
+    LoginStatusComponent,
+    UsersComponent
   ],
   imports: [
     RouterModule.forRoot(routes),

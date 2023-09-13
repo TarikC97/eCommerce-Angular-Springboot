@@ -12,6 +12,7 @@ export class LoginStatusComponent {
 
    user: User = JSON.parse(localStorage.getItem('userLogged') || '{}')
    name:any = this.user.name
+   role: any = this.user.role
 
    constructor(private router: Router,
                public status: RegisterService,
