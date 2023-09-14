@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/common/product';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -14,9 +15,14 @@ export class AdminProductsComponent {
   thePageSize: number = 5;
   theTotalElements: number = 0;
 
-  constructor(private productService: ProductService){}
+  constructor(private productService: ProductService,
+              private cdr: ChangeDetectorRef,
+              private route: ActivatedRoute){}
 
-  ngOnInit(){
+  ngOnInit():void{
+    this.productService.refreshNeeded$.subscribe(()=>{
+      this.allProducts()
+    })
     this.allProducts()
    }
   deleteProduct(product: any){

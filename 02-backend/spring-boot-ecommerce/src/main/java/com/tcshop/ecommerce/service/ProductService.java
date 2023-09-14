@@ -10,11 +10,6 @@ public class ProductService {
 
     @Autowired
     ProductRepository productRepository;
-//    public List<Product> getAllProducts(){
-//        List<Product> products = new ArrayList<Product>();
-//        productRepository.findAll().forEach(product -> products.add(product));
-//        return  products;
-//    }
 
     @Transactional
     public void deleteProduct(String sku){

@@ -10,7 +10,7 @@ import { RegisterService } from 'src/app/services/register.service';
 })
 export class LoginStatusComponent {
 
-   user: User = JSON.parse(localStorage.getItem('userLogged') || '{}')
+   user: User = JSON.parse(window.localStorage.getItem('userLogged') || '{}')
    name:any = this.user.name
    role: any = this.user.role
 
@@ -19,8 +19,8 @@ export class LoginStatusComponent {
                public userLog: RegisterService){}
     logout() {
       //Removes user from data storage, and redirects.
-      localStorage.removeItem('userLogged')
-      localStorage.removeItem('user')
+      window.localStorage.removeItem('userLogged')
+      window.localStorage.removeItem('user')
       this.status.setLoginStatus(0);
       this.router.navigate(['/login'])
     }

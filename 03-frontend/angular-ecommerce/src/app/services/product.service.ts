@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable,Subject } from 'rxjs';
 import { Product } from '../common/product';
-import {map} from 'rxjs/operators'
+import {map, tap} from 'rxjs/operators'
 import { ProductCategory } from '../common/product-category';
 
 @Injectable({
@@ -16,8 +16,20 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) { }
 
+  private _refreshNeeded$ = new Subject<void>()
+
+  get refreshNeeded$(){
+      return this._refreshNeeded$
+  }
+
   deleteProduct(product: string):Observable<any>{
-    return this.httpClient.delete<any>(`${this.deleteUrl}/${product}`)
+    return this.httpClient
+    .delete<any>(`${this.deleteUrl}/${product}`)
+    .pipe(
+      tap(()=>{
+        this._refreshNeeded$.next()
+      })
+     )
   }
 
   getProduct(theProductId: number): Observable<Product>{

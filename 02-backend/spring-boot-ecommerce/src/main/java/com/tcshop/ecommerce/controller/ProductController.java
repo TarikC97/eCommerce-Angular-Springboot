@@ -12,10 +12,6 @@ public class ProductController {
 
     @Autowired
     ProductService productService;
-//    @GetMapping("/admin/products")
-//    public List<Product> getAllProducts(){
-//        return productService.getAllProducts();
-//    }
     @Transactional
     @DeleteMapping("/products/delete/{sku}")
     public void deleteProduct(@PathVariable String sku){

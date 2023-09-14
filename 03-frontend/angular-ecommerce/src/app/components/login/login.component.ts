@@ -44,7 +44,7 @@ export class LoginComponent {
          this.userService.loginUser(user).subscribe({
            next: response=>{
              alert('User is Logged!')
-             localStorage.setItem('userLogged',JSON.stringify(response));
+             window.localStorage.setItem('userLogged',JSON.stringify(response));
              this.status.setLoginStatus(1);
              this.router.navigate(['/products'])
            },
