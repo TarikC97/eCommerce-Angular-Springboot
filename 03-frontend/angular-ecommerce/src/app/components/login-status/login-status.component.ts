@@ -10,19 +10,11 @@ import { RegisterService } from 'src/app/services/register.service';
 })
 export class LoginStatusComponent {
 
-   user: User = JSON.parse(window.localStorage.getItem('userLogged') || '{}')
-   name:any = this.user.name
-   role: any = this.user.role
+   newUser: User = new User()
 
-   constructor(private router: Router,
-               public status: RegisterService,
+   constructor(public status: RegisterService,
                public userLog: RegisterService){}
-    logout() {
-      //Removes user from data storage, and redirects.
-      window.localStorage.removeItem('userLogged')
-      window.localStorage.removeItem('user')
-      this.status.setLoginStatus(0);
-      this.router.navigate(['/login'])
+    ngOnInit():void{
+      this.newUser = JSON.parse(window.localStorage.getItem('userLogged')|| '{}')
     }
-
 }

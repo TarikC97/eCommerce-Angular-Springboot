@@ -14,8 +14,7 @@ export class LoginComponent {
 
   constructor(private userService: RegisterService,
     private formBuilder: FormBuilder,
-    private router: Router,
-    public status: RegisterService){}
+    private router: Router,){}
 
     loginFormGroup!: FormGroup;
     
@@ -37,15 +36,13 @@ export class LoginComponent {
         this.loginFormGroup.markAllAsTouched()
         return
       }
-      
-        let user = new User();
+         let user = new User();
          user.email = this.loginFormGroup.controls['email'].value
          user.password = this.loginFormGroup.controls['password'].value
          this.userService.loginUser(user).subscribe({
            next: response=>{
              alert('User is Logged!')
              window.localStorage.setItem('userLogged',JSON.stringify(response));
-             this.status.setLoginStatus(1);
              this.router.navigate(['/products'])
            },
            error: err=>{

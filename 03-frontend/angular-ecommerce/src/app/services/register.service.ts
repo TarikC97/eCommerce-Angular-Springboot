@@ -4,6 +4,7 @@ import { User } from '../common/user';
 import { Observable } from 'rxjs';
 import { Roles } from '../common/roles';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +15,8 @@ export class RegisterService {
   private loginUrl = 'http://localhost:8080/api/login';
   private verifyUrl = 'http://localhost:8080/api/verify';
 
-  constructor(private httpClient: HttpClient) { }
-  public loginStatus = 0 //0-not logged,1-logged!
-
+  constructor(private httpClient: HttpClient,
+              private router: Router) {}
   registerUser(register: User):Observable<any>{
       return this.httpClient.post<User>(this.registerUrl,register);
   }
@@ -26,11 +26,13 @@ export class RegisterService {
   loginUser(login:User):Observable<any>{
     return this.httpClient.post<User>(this.loginUrl,login)
   }
-  setLoginStatus(status: number){
-    this.loginStatus = status
+  loggedIn(){
+    return !!window.localStorage.getItem('userLogged')
   }
-}
-
-interface GetResponseRoles{
-    role: Roles[]
+  logout() {
+    //Removes user from data storage, and redirects.
+    window.localStorage.removeItem('userLogged')
+    window.localStorage.removeItem('user')
+    this.router.navigate(['/login'])
+  }
 }
