@@ -8,18 +8,16 @@
             <th>SKU</th>
             <th>Price</th>
             <th>Units in Stock</th>
+            <td><button routerLink="/admin/addproduct" class="btn btn-success btn">Add New Product</button></td>
            </tr>
        </thead>
        <tbody>
         <tr *ngFor="let prod of products">
-            <!-- <td>
-                <img src="{{prod.imageUrl}}" height="50px" />
-            </td> -->
             <td>{{prod.name}}</td>
             <td>{{prod.sku}}</td>
             <td>{{prod.unitPrice | currency:'USD'}}</td>
             <td>{{prod.unitsInStock}}</td>
-            <td><button (click)="deleteProduct(prod.sku)" class="btn btn-danger btn-sm">Delete</button></td>
+            <td><button (click)="deleteProduct(prod.sku)" class="btn btn-danger btn">Delete Product</button></td>   
            </tr>
        </tbody>
      </table>

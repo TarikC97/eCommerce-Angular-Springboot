@@ -13,6 +13,10 @@ export class ProductService {
   private baseUrl = 'http://localhost:8080/api/products';
   private categoryUrl = 'http://localhost:8080/api/product-category';
   private deleteUrl = 'http://localhost:8080/api/products/delete'
+  private addProductUrl = 'http://localhost:8080/api/products/add'
+  private allCategories = 'http://localhost:8080/api/category/all';
+  private allProducts = 'http://localhost:8080/api/products/all';
+  private singleProduct = 'http://localhost:8080/api/products/all/id'
 
   constructor(private httpClient: HttpClient) { }
 
@@ -30,6 +34,25 @@ export class ProductService {
         this._refreshNeeded$.next()
       })
      )
+  }
+  addProduct(product: Product):Observable<Product>{
+    return this.httpClient
+    .post<Product>(`${this.addProductUrl}`,product)
+    .pipe(
+      tap(()=>{
+        this._refreshNeeded$.next()
+      })
+     )
+  }
+  getAllCategories():Observable<ProductCategory[]>{
+    return this.httpClient.get<ProductCategory[]>(this.allCategories);
+  }
+  getProductsAll():Observable<Product[]>{
+    return this.httpClient
+    .get<Product[]>(this.allProducts);
+  }
+  getSingleProduct(id:number):Observable<Product>{
+    return this.httpClient.get<Product>(`${this.singleProduct}/${id}`);
   }
 
   getProduct(theProductId: number): Observable<Product>{

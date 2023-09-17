@@ -28,6 +28,7 @@ export class ProductDetailsComponent {
     this.productService.getProduct(theProductId).subscribe(
       data=>{
         this.product=data;
+        console.log(data)
       }
     )
   }

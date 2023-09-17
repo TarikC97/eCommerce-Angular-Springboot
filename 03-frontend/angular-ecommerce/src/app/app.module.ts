@@ -21,8 +21,10 @@ import { LoginComponent } from './components/login/login.component';
 import { LoginStatusComponent } from './components/login-status/login-status.component';
 import { UsersComponent } from './components/users/users.component';
 import { AdminProductsComponent } from './components/admin-products/admin-products.component';
+import { AddproductComponent } from './components/addproduct/addproduct.component';
 
 const routes: Routes =[
+  {path:'admin/addproduct', component: AddproductComponent},
   {path:'admin/products', component: AdminProductsComponent},
   {path:'users',component: UsersComponent},
   {path:'login',component: LoginComponent},
@@ -55,7 +57,8 @@ const routes: Routes =[
     LoginComponent,
     LoginStatusComponent,
     UsersComponent,
-    AdminProductsComponent
+    AdminProductsComponent,
+    AddproductComponent
   ],
   imports: [
     RouterModule.forRoot(routes),
