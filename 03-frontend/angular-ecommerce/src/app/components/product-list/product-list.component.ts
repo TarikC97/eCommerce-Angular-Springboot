@@ -14,13 +14,14 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductListComponent {
 
   products: Product[] = [];
+  // products2: Product[]=[];
   currentCategoryId: number = 1;
   previousCategoryId: number = 1;
   searchMode: boolean = false;
 
   //new properties for pagination
   thePageNumber: number = 1;
-  thePageSize: number = 3;
+  thePageSize: number = 5;
   theTotalElements: number = 0;
 
   previousKeyword: string = "";
@@ -34,7 +35,16 @@ export class ProductListComponent {
     this.route.paramMap.subscribe(()=>{
       this.listProducts();
     })
+    // this.allProducts()
   }
+  // allProducts(){
+  //   this.productService.getAllProducts().subscribe(
+  //     data=>{
+  //       this.products2=data
+
+  //     }
+  //   )
+  // }
   listProducts(){
     //We are performing search if has('keyword') is true.
     this.searchMode = this.route.snapshot.paramMap.has('keyword')

@@ -3,6 +3,7 @@ package com.tcshop.ecommerce.controller;
 import com.tcshop.ecommerce.config.EmailBody;
 import com.tcshop.ecommerce.config.OtpCode;
 import com.tcshop.ecommerce.dao.UserRepository;
+import com.tcshop.ecommerce.entity.Customer;
 import com.tcshop.ecommerce.entity.User;
 import com.tcshop.ecommerce.service.UserService;
 import jakarta.mail.MessagingException;
@@ -84,6 +85,11 @@ public class UserController {
     @DeleteMapping("/delete/{id}")
     public void deleteUser(@PathVariable("id") Long id){
         userService.deleteUser(id);
+    }
+
+    @GetMapping("/customers")
+    public Iterable<Customer> getAllCustomers(){
+        return userService.findCustomers();
     }
 
 }

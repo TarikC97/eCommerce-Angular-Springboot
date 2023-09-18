@@ -6,20 +6,22 @@ import { ProductCategory } from 'src/app/common/product-category';
 import { ProductService } from 'src/app/services/product.service';
 import { TCShopValidators } from 'src/app/validators/tcshop-validators';
 
+
 @Component({
   selector: 'app-addproduct',
   templateUrl: './addproduct.component.html',
   styleUrls: ['./addproduct.component.css']
 })
 export class AddproductComponent {
+
    product: Product[]=[]
    categoryProduct: ProductCategory[] =[]
    productFormGroup!: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
-              private productService: ProductService){}
-
+              private productService: ProductService,){}
+              
   ngOnInit(): void{
     this.productFormGroup = this.formBuilder.group({
         name: new FormControl('',
@@ -94,4 +96,5 @@ export class AddproductComponent {
       }      
     })
   }
+
 }

@@ -1,6 +1,7 @@
 package com.tcshop.ecommerce.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,18 +37,22 @@ public class Order {
     @UpdateTimestamp
     private Date lastUpdated;
 
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "order")
     private Set<OrderItem> orderItems = new HashSet<>();
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
 
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "shipping_address_id", referencedColumnName = "id")
     private Address shippingAddress;
 
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "billing_address_id", referencedColumnName = "id")
     private Address billingAddress;

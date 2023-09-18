@@ -5,15 +5,16 @@
             <!--loop over the collection of products -->
                 <div class="col-md-3" *ngFor="let prod of products" >
                     <div class="product-box">
-                        <a routerLink="/products/{{prod.id}}" >
+                        <a>
                             <img src="{{prod.imageUrl}}" class="img-responsive">
                         </a>
-                        <a routerLink="/products/{{prod.id}}">
+                        <a>
                             <h1>{{prod.name}}</h1>
                         </a>
                         <div class="price">{{prod.unitPrice | currency:'USD'}}</div>
-                        <button (click)="addToCart(prod)" class="btn btn-primary btn-sm">Add to cart</button>
+                        <button (click)="addToCart(prod)" class="btn btn-primary btn-sm">Add to cart</button>  
                     </div>
+                    
                 </div>
                 <!--if products empty display msg to user-->
                 <div *ngIf="products?.length == 0" 
@@ -22,8 +23,9 @@
                     >
                     No products found.
                 </div>
+              
             </div>
-
+           
             <!--begin footer-->
                 <div class="footer-pagination">
                     <div class="row">
@@ -34,7 +36,7 @@
                                     <ngb-pagination [(page)]="thePageNumber"
                                                     [pageSize]="thePageSize"
                                                     [collectionSize]="theTotalElements"
-                                                    [maxSize]="3"
+                                                    [maxSize]="5"
                                                     [boundaryLinks]="true"
                                                     (pageChange)="listProducts()">
 
@@ -43,7 +45,7 @@
                                 <div class="col-md-3 mt-2" style="text-align: right;">
                                     <span class="mr-2">Page Size</span>
                                     <select (change)="updatePageSize($any($event.target).value)">
-                                        <option selected="true">3</option>
+                                        <option selected="true">5</option>
                                         <option>10</option>
                                         <option>20</option>
                                     </select>

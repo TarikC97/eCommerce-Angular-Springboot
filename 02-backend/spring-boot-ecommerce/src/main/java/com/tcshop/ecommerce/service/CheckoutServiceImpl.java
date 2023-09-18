@@ -1,12 +1,14 @@
 package com.tcshop.ecommerce.service;
 
 import com.tcshop.ecommerce.dao.CustomerRepository;
+import com.tcshop.ecommerce.dao.OrdersRepository;
 import com.tcshop.ecommerce.dto.Purchase;
 import com.tcshop.ecommerce.dto.PurchaseResponse;
 import com.tcshop.ecommerce.entity.Customer;
 import com.tcshop.ecommerce.entity.Order;
 import com.tcshop.ecommerce.entity.OrderItem;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -17,6 +19,9 @@ public class CheckoutServiceImpl implements  CheckoutService{
 
     //Implementation: CheckoutController -> CheckoutService -> springDataJpaRepo -> DB
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private OrdersRepository ordersRepository;
 
     //Optional - autowired since only one constructor
     public CheckoutServiceImpl(CustomerRepository customerRepository){
@@ -54,5 +59,8 @@ public class CheckoutServiceImpl implements  CheckoutService{
         //generate a random UUID number(uuid.v4)
         //UUID - Universally Unique Identifier
         return UUID.randomUUID().toString();
+    }
+    public Iterable<Order> findOrders() {
+        return ordersRepository.findAll();
     }
 }
