@@ -25,6 +25,7 @@ import { AddproductComponent } from './components/addproduct/addproduct.componen
 import { AdminOrdersComponent } from './components/admin-orders/admin-orders.component';
 import { UserOrdersComponent } from './components/user-orders/user-orders.component';
 
+
 const routes: Routes =[
   {path:'user/orders',component:UserOrdersComponent},
   {path:'admin/orders',component:AdminOrdersComponent},
