@@ -10,13 +10,13 @@ import { ProductCategory } from '../common/product-category';
 })
 export class ProductService {
  
-  private baseUrl = 'http://localhost:8080/api/products';
-  private categoryUrl = 'http://localhost:8080/api/product-category';
-  private deleteUrl = 'http://localhost:8080/api/products/delete'
-  private addProductUrl = 'http://localhost:8080/api/products/add'
-  private allCategories = 'http://localhost:8080/api/category/all';
-  private allProducts = 'http://localhost:8080/api/products/all';
-  private singleProduct = 'http://localhost:8080/api/products/all/id'
+  private baseUrl = 'http://springtc.eu-north-1.elasticbeanstalk.com/api/products';
+  private categoryUrl = 'http://springtc.eu-north-1.elasticbeanstalk.com/api/product-category';
+  private deleteUrl = 'http://springtc.eu-north-1.elasticbeanstalk.com/api/products/delete'
+  private addProductUrl = 'http://springtc.eu-north-1.elasticbeanstalk.com/api/products/add'
+  private allCategories = 'http://springtc.eu-north-1.elasticbeanstalk.com/api/category/all';
+  private allProducts = 'http://springtc.eu-north-1.elasticbeanstalk.com/api/products/all';
+  private singleProduct = 'http://springtc.eu-north-1.elasticbeanstalk.com/api/products/all/id'
 
   constructor(private httpClient: HttpClient) { }
 

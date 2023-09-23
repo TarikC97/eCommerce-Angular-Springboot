@@ -11,9 +11,9 @@ import { Router } from '@angular/router';
 })
 export class RegisterService {
 
-  private registerUrl = 'http://localhost:8080/api/register';
-  private loginUrl = 'http://localhost:8080/api/login';
-  private verifyUrl = 'http://localhost:8080/api/verify';
+  private registerUrl = 'http://springtc.eu-north-1.elasticbeanstalk.com/api/register';
+  private loginUrl = 'http://springtc.eu-north-1.elasticbeanstalk.com/api/login';
+  private verifyUrl = 'http://springtc.eu-north-1.elasticbeanstalk.com/api/verify';
 
   constructor(private httpClient: HttpClient,
               private router: Router) {}

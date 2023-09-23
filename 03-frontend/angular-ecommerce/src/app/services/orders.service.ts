@@ -10,8 +10,8 @@ import { Customer } from '../common/customer';
   providedIn: 'root'
 })
 export class OrdersService {
-  private adminOrderUrl = 'http://localhost:8080/api/checkout/orders';
-  private userOrderUrl = 'http://localhost:8080/api/customers';
+  private adminOrderUrl = 'http://springtc.eu-north-1.elasticbeanstalk.com/api/checkout/orders';
+  private userOrderUrl = 'http://springtc.eu-north-1.elasticbeanstalk.com/api/customers';
   
   constructor(private httpClient: HttpClient) { }
 
